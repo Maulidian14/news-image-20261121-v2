@@ -1,42 +1,31 @@
-// Renders index.html to entry.png (1024x1024) using the local Chromium
-// through Playwright. Run: node generate.mjs
-import { chromium } from 'playwright-core';
-import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
+// Render the newspaper page into the entry image.
+//
+// Reads index.html from this folder and screenshots it at 1024x1024
+// with headless Chromium, writing entry.png beside it. Run with:
+//     node generate.mjs
+// Needs the playwright package (chromium) installed where Node can
+// find it. The render is deterministic: same page, same pixels.
 
-const here = dirname(fileURLToPath(import.meta.url));
+import { chromium } from "playwright";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 
-async function render() {
-  const browser = await chromium.launch({
-    headless: true,
-    args: [
-      '--no-sandbox',
-      '--disable-dev-shm-usage',
-      '--hide-scrollbars',
-      '--force-device-scale-factor=1',
-      '--allow-file-access-from-files',
-    ],
+const SIDE = 1024;
+
+const folder = dirname(fileURLToPath(import.meta.url));
+const pagePath = join(folder, "index.html");
+const imagePath = join(folder, "entry.png");
+
+const browser = await chromium.launch();
+try {
+  const page = await browser.newPage({
+    viewport: { width: SIDE, height: SIDE },
+    deviceScaleFactor: 1,
   });
-  try {
-    const page = await browser.newPage({
-      viewport: { width: 1024, height: 1024 },
-      deviceScaleFactor: 1,
-    });
-    const problems = [];
-    page.on('pageerror', (err) => problems.push(String(err)));
-    await page.goto('file://' + join(here, 'index.html'), {
-      waitUntil: 'load',
-      timeout: 60000,
-    });
-    await page.waitForTimeout(800);
-    await page.screenshot({ path: join(here, 'entry.png'), type: 'png' });
-    if (problems.length > 0) {
-      console.log('PAGE ERRORS:', problems.join(' | '));
-    }
-    console.log('rendered entry.png');
-  } finally {
-    await browser.close();
-  }
+  await page.goto(`file://${pagePath}`, { waitUntil: "load" });
+  await page.waitForTimeout(500);
+  await page.screenshot({ path: imagePath });
+  console.log(`rendered ${imagePath} at ${SIDE}x${SIDE}`);
+} finally {
+  await browser.close();
 }
-
-await render();

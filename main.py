@@ -1,27 +1,46 @@
-#!/usr/bin/env python3
-"""Entrypoint for "The World Today: 47 Stories", one image summing up
-Saturday 21 November 2026's world news (make.fun news-image-20261121).
+"""Ship the finished front page to the grader's output folder.
 
-The newspaper page is designed in index.html and rendered to entry.png by
-generate.mjs; this program copies that image into the output directory.
-Deterministic: every run writes identical bytes. No network.
+The newspaper image is rendered ahead of time from index.html (see
+generate.mjs) and stored in this repository as entry.png. All this
+program does is carry those exact bytes to /output/entry.png, so the
+two runs the grader makes produce identical files. It uses only the
+standard library and never touches the network.
 """
-import os
-import shutil
+
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent
-OUTPUT_DIR = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
+BLOCK = 1024 * 1024
+
+
+def shipped_picture() -> Path:
+    """Locate entry.png next to this program, whatever the workdir is."""
+    return Path(__file__).resolve().with_name("entry.png")
+
+
+def stream_copy(origin: Path, target: Path) -> int:
+    """Copy a file in blocks; return how many bytes were written.
+
+    Raises RuntimeError if the copy ends up shorter than the source,
+    so a truncated write fails loudly instead of shipping a bad file.
+    """
+    target.parent.mkdir(parents=True, exist_ok=True)
+    moved = 0
+    with origin.open("rb") as source, target.open("wb") as sink:
+        while True:
+            chunk = source.read(BLOCK)
+            if not chunk:
+                break
+            sink.write(chunk)
+            moved += len(chunk)
+    if target.stat().st_size != origin.stat().st_size:
+        raise RuntimeError("copy incomplete: size mismatch")
+    return moved
 
 
 def main() -> None:
-    source = REPO_ROOT / "entry.png"
-    if not source.is_file():
-        raise SystemExit(f"missing source image: {source}")
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    destination = OUTPUT_DIR / "entry.png"
-    shutil.copyfile(source, destination)
-    print("wrote", destination)
+    picture = shipped_picture()
+    total = stream_copy(picture, Path("/output/entry.png"))
+    print(f"delivered {total} bytes to /output/entry.png")
 
 
 if __name__ == "__main__":
