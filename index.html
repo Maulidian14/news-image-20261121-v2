@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The World Today: 47 Stories — Saturday, 21 November 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1024px; height: 1024px; }
+  body {
+    background: #f4eedd;
+    color: #17130c;
+    font-family: Georgia, "Noto Serif", "DejaVu Serif", serif;
+    padding: 14px 26px 8px 26px;
+    overflow: hidden;
+    position: relative;
+  }
+  .grain {
+    position: absolute; inset: 0; pointer-events: none; z-index: 5; opacity: .55;
+    mix-blend-mode: multiply;
+  }
+  .masthead { text-align: center; position: relative; }
+  .masthead .over {
+    font-family: Helvetica, Arial, "Noto Sans", sans-serif;
+    font-size: 11px; letter-spacing: 4px; color: #8a2f23; font-weight: bold;
+  }
+  .masthead h1 {
+    font-size: 48px; line-height: 1.0; font-weight: 900; letter-spacing: -1.5px;
+    margin: 1px 0 1px 0;
+  }
+  .masthead .tagline { font-style: italic; font-size: 13px; color: #5a5342; }
+  .halftone {
+    height: 6px; margin-top: 5px;
+    background-image: radial-gradient(circle, rgba(23,19,12,.55) 1.1px, transparent 1.4px);
+    background-size: 7px 7px;
+    border-top: 2px solid #17130c; border-bottom: 1px solid #17130c;
+  }
+  .datebar {
+    background: #17130c; color: #f4eedd; text-align: center;
+    font-family: Helvetica, Arial, "Noto Sans", sans-serif; font-weight: bold;
+    font-size: 18px; letter-spacing: 2.5px; padding: 5px 0; margin: 8px 0 6px 0;
+  }
+  .datebar span { color: #e8c85a; }
+  .numbers {
+    font-family: Helvetica, Arial, "Noto Sans", sans-serif; font-size: 10px;
+    text-align: center; color: #3d382c; letter-spacing: .2px;
+    border-top: 1px solid #b8ad90; border-bottom: 1px solid #b8ad90;
+    padding: 2px 0; margin-bottom: 10px;
+  }
+  .numbers b { color: #8a2f23; }
+  .leadrow { display: flex; gap: 16px; padding-bottom: 8px; border-bottom: 2px solid #17130c; margin-bottom: 6px; }
+  .lead { flex: 0 0 596px; display: flex; gap: 14px; }
+  .lead .art {
+    flex: 0 0 218px; height: 158px; background: #16233a;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lead .text { flex: 1; }
+  .kicker {
+    font-family: Helvetica, Arial, "Noto Sans", sans-serif; font-size: 10.5px;
+    font-weight: bold; letter-spacing: 2px; color: #8a2f23; margin-bottom: 4px;
+  }
+  .lead h2 { font-size: 28px; line-height: 1.1; font-weight: 900; margin-bottom: 6px; }
+  .lead p { font-size: 14px; line-height: 1.38; color: #2c2820; }
+  .side { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .second { display: flex; gap: 10px; }
+  .second .thumb {
+    flex: 0 0 72px; height: 72px; display: flex; align-items: center; justify-content: center;
+  }
+  .second .tx { flex: 1; }
+  .second h3 { font-size: 16px; line-height: 1.12; font-weight: 900; margin-bottom: 3px; }
+  .second p { font-size: 11px; line-height: 1.32; color: #2c2820; }
+  .t-flame { background: #5c2a1a; }
+  .t-cuffs { background: #2e4a2e; }
+  .sectionhead {
+    display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px;
+  }
+  .sectionhead h2 {
+    font-family: Helvetica, Arial, "Noto Sans", sans-serif; font-size: 13px;
+    font-weight: 900; letter-spacing: 2px;
+  }
+  .sectionhead .rule { flex: 1; border-top: 2px solid #17130c; }
+  .sectionhead .count {
+    font-family: Helvetica, Arial, "Noto Sans", sans-serif; font-size: 10px;
+    color: #5a5342; letter-spacing: 1px;
+  }
+  .grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 50px; column-gap: 14px; row-gap: 3px;
+  }
+  .item { overflow: hidden; border-top: 1px solid #cfc4a8; padding-top: 2px; }
+  .item .gk {
+    font-family: Helvetica, Arial, "Noto Sans", sans-serif; font-size: 7.5px;
+    font-weight: bold; letter-spacing: 1.2px; color: #6b6250; line-height: 1.2;
+  }
+  .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 4px; vertical-align: 1px; }
+  .d-eu { background: #1d4e89; } .d-na { background: #8a2f23; } .d-la { background: #2e7d32; }
+  .d-me { background: #b26a00; } .d-af { background: #6a4a8f; } .d-as { background: #0f766e; }
+  .d-oc { background: #be185d; } .d-gl { background: #33302a; }
+  .item h4 { font-size: 10.5px; line-height: 1.14; font-weight: 900; margin: 1px 0; }
+  .item p { font-size: 9px; line-height: 1.15; color: #4a4436; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .footer {
+    margin-top: 5px; padding-top: 4px; border-top: 2px solid #17130c;
+    font-family: Helvetica, Arial, "Noto Sans", sans-serif; font-size: 9.5px;
+    color: #5a5342; text-align: center; letter-spacing: .3px;
+  }
+</style>
+</head>
+<body>
+  <svg class="grain" width="1024" height="1024" xmlns="http://www.w3.org/2000/svg">
+    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="1024" height="1024" filter="url(#n)" opacity="0.05"/>
+  </svg>
+
+  <div class="masthead">
+    <div class="over">ONE DAY &nbsp;•&nbsp; 47 STORIES &nbsp;•&nbsp; 7 REGIONS &nbsp;•&nbsp; AS IT HAPPENED</div>
+    <h1>The World Today</h1>
+    <div class="tagline">Every story that mattered on Saturday, 21 November 2026 — on a single page</div>
+    <div class="halftone"></div>
+  </div>
+  <div class="datebar">SATURDAY, <span>21 NOVEMBER 2026</span></div>
+  <div class="numbers"><b>BY THE NUMBERS</b> &nbsp; $3.79bn GTA VI day one &nbsp;•&nbsp; 69% dengue cut in Brazil &nbsp;•&nbsp; 6.7 Peru quake &nbsp;•&nbsp; 259 House seats &nbsp;•&nbsp; &euro;370bn off European markets &nbsp;•&nbsp; 35 F1 lead changes</div>
+
+  <div class="leadrow">
+    <div class="lead">
+      <div class="art">
+        <svg width="196" height="150" viewBox="0 0 196 150">
+          <circle cx="98" cy="68" r="52" fill="none" stroke="#e8c85a" stroke-width="2.5"/>
+          <ellipse cx="98" cy="68" rx="52" ry="20" fill="none" stroke="#e8c85a" stroke-width="1.2" opacity=".7"/>
+          <ellipse cx="98" cy="68" rx="20" ry="52" fill="none" stroke="#e8c85a" stroke-width="1.2" opacity=".7"/>
+          <line x1="98" y1="16" x2="98" y2="120" stroke="#e8c85a" stroke-width="1.2" opacity=".7"/>
+          <circle cx="118" cy="48" r="7" fill="#c93a2e"/>
+          <circle cx="118" cy="48" r="12" fill="none" stroke="#c93a2e" stroke-width="1.5"/>
+          <circle cx="118" cy="48" r="18" fill="none" stroke="#c93a2e" stroke-width="1" opacity=".6"/>
+          <text x="98" y="142" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="bold" letter-spacing="5" fill="#f4eedd">WARSAW</text>
+        </svg>
+      </div>
+      <div class="text">
+        <div class="kicker">WARSAW &nbsp;•&nbsp; NATO</div>
+        <h2>NATO Chief Flies to Warsaw After Missiles Land in Poland</h2>
+        <p>Mark Rutte visits a day after Russian missiles came down on NATO soil — a Kh-101 near Nowy Lipowiec and two more objects. Warsaw calls it deliberate; allied jets scrambled.</p>
+      </div>
+    </div>
+    <div class="side">
+      <div class="second">
+        <div class="thumb t-flame">
+          <svg width="64" height="64" viewBox="0 0 64 64">
+            <path d="M32 8 C 40 20 48 26 48 38 A16 16 0 0 1 16 38 C 16 26 24 20 32 8 Z" fill="#e8c85a"/>
+            <path d="M32 28 C 36 33 39 36 39 41 A7 7 0 0 1 25 41 C 25 36 28 33 32 28 Z" fill="#c93a2e"/>
+            <rect x="10" y="52" width="44" height="4" fill="#f4eedd"/>
+          </svg>
+        </div>
+        <div class="tx">
+          <div class="kicker">MANAMA &nbsp;•&nbsp; GULF</div>
+          <h3>Iran Strikes Bahrain; Guards Claim US Bases Hit</h3>
+          <p>Bahrain says an attack set an industrial site ablaze, no injuries. Tehran says it hit US positions at al-Riffa and Awali.</p>
+        </div>
+      </div>
+      <div class="second">
+        <div class="thumb t-cuffs">
+          <svg width="64" height="64" viewBox="0 0 64 64">
+            <circle cx="22" cy="34" r="12" fill="none" stroke="#f4eedd" stroke-width="4"/>
+            <circle cx="42" cy="34" r="12" fill="none" stroke="#f4eedd" stroke-width="4"/>
+            <line x1="32" y1="22" x2="32" y2="14" stroke="#e8c85a" stroke-width="4"/>
+            <rect x="24" y="10" width="16" height="8" rx="2" fill="#e8c85a"/>
+          </svg>
+        </div>
+        <div class="tx">
+          <div class="kicker">SINALOA &nbsp;•&nbsp; CARTELS</div>
+          <h3>Mexico Captures &ldquo;El Chapo Isidro&rdquo;; 11 Dead</h3>
+          <p>Special forces seize FBI most-wanted boss Fausto Isidro Meza Flores in Guasave. Gunfights and roadblocks follow.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sectionhead">
+    <h2>THE DAY IN FULL</h2>
+    <div class="rule"></div>
+    <div class="count">44 MORE STORIES &nbsp;•&nbsp; COLOUR DOT = REGION</div>
+  </div>
+
+  <div class="grid">
+    <div class="item"><div class="gk"><span class="dot d-eu"></span>CLIMATE &bull; ANTALYA</div><h4>COP31 Talks in Overtime, Close to a Deal</h4><p>Deal near, chief says; draft leaves out fossil fuels.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-gl"></span>SPACE &bull; MERCURY</div><h4>BepiColombo Enters Orbit Around Mercury</h4><p>ESA&ndash;JAXA probe fires thrusters at 19:24 CET.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-eu"></span>UKRAINE &bull; KRYVYI RIH</div><h4>Missile on Zelenskyy&rsquo;s Hometown Kills Boy, 7</h4><p>A paramedic also killed; 28 remain in hospital.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-eu"></span>BALTIC &bull; GULF OF FINLAND</div><h4>Russian Cargo Ship Ablaze After Drone Strike</h4><p>Sparta II burns en route to Kaliningrad; crew flees.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-eu"></span>UKRAINE &bull; KYIV</div><h4>Kyiv Attacks Kill 3, Cripple Bridges</h4><p>Overnight strikes cut power, damage transport.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-me"></span>MIDDLE EAST &bull; RIYADH</div><h4>Saudi Defences Down 3 Houthi Missiles</h4><p>Third straight night of alerts; no damage reported.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-me"></span>GULF &bull; HORMUZ</div><h4>Two More Tankers Hit; Strikes at Wartime High</h4><p>Oil shipments through the strait down 15%.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-me"></span>GAZA &bull; FOOD VAN</div><h4>Israeli Drone Strike on Food Van Kills 3</h4><p>Attack in Gaza City as winter closes in, reports say.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-me"></span>IRAQ &bull; BASRA</div><h4>Power Station Fire Near Basra Kills at Least 4</h4><p>Blaze at 800MW Hartha plant injures 30 to 35.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-na"></span>WASHINGTON &bull; IRAN</div><h4>Trump Weighs New Strikes on Iran</h4><p>Israel presses for a 4&ndash;7 day air campaign.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-as"></span>THE HAGUE &bull; JUSTICE</div><h4>ICJ: Myanmar Committed Rohingya Genocide</h4><p>Court rules 9&ndash;6; France seeks UN council meeting.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-as"></span>CHINA &bull; APEC</div><h4>Trump, Xi and Putin Meet in Shenzhen</h4><p>Trilateral at APEC; &ldquo;Shenzhen Outlook&rdquo; published.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-eu"></span>UKRAINE &bull; KYIV</div><h4>Zelenskyy Calls Putin a &ldquo;Killer&rdquo;</h4><p>Says Trump told Europe it spends too much.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-as"></span>TRADE &bull; BRUSSELS</div><h4>Indonesia and EU Sign Landmark Trade Pact</h4><p>Deal frees 98% of $30bn-a-year trade.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-as"></span>ASIA &bull; APEC</div><h4>Takaichi Held No Taiwan Talks at APEC</h4><p>No Taiwanese envoy met, despite two Xi handshakes.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-na"></span>US &bull; MIDTERMS</div><h4>Democrats Projected to Win 259 House Seats</h4><p>Largest House majority since 1990.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-na"></span>US &bull; CONGRESS</div><h4>Senate Rejects Iran War Powers Measure</h4><p>Falls three votes short of passing.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-na"></span>US &bull; WHITE HOUSE</div><h4>Vance Won&rsquo;t Back Trump Claim on Iran</h4><p>Vice-president declines to endorse the assertion.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-eu"></span>EUROPE &bull; MIGRATION</div><h4>Five EU States to Send Migrants to Rwanda</h4><p>Rejected asylum seekers to be sent from 2027.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-as"></span>INDIA &bull; SCO FORUM</div><h4>Modi Links Culture to Global Peace</h4><p>PM opens SCO forum in Delhi.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-as"></span>NEPAL &bull; DELHI</div><h4>Nepal&rsquo;s PM Begins First India Visit</h4><p>Balendra Shah to meet Modi in New Delhi.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-la"></span>LATIN AMERICA &bull; DIPLOMACY</div><h4>Hegseth Tours Region; Brazil Probes Donor Net</h4><p>Court probes Vance-linked Bolsonaro funds.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-la"></span>TRADE &bull; SANTIAGO</div><h4>Chile&ndash;Philippines Duty-Free Deal Signed</h4><p>Pact covers nearly all Philippine exports.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-na"></span>MARKETS &bull; NEW YORK</div><h4>AI Sell-Off Pushes Stocks Into Correction</h4><p>S&amp;P, Dow in correction; Nasdaq erases 2026 gains.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-na"></span>TECH &bull; CHIPS</div><h4>Nvidia Halts H200 Exports to China</h4><p>Shares fall 14% as SEC accounting probe reported.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-na"></span>MARKETS &bull; IPO</div><h4>Anthropic&rsquo;s $2tn Debut Stumbles on Day 2</h4><p>Shares drop 8.5% after record Wall Street listing.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-na"></span>CRYPTO &bull; BITCOIN</div><h4>Bitcoin Dips to $55,300, Then Rebounds</h4><p>Lowest since Sept 2024, then back above $60,000.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-as"></span>CHINA &bull; TECH</div><h4>Chinese AI Stocks Shed $1.7 Trillion</h4><p>Sell-off deepens as US chip curbs bite.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-na"></span>GAMES &bull; LAUNCH</div><h4>GTA VI Makes $3.79bn on Day One</h4><p>Biggest entertainment launch ever, Rockstar says.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-la"></span>HEALTH &bull; BRAZIL</div><h4>Mosquitoes Cut Child Dengue by 69%</h4><p>Wolbachia mosquitoes bring hope in Brazil study.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-na"></span>SCIENCE &bull; MATHS</div><h4>AI-Assisted Riemann Proof Claimed</h4><p>Mathematician credits Claude for the proof.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-af"></span>HEALTH &bull; CONGO</div><h4>Ebola Kills 64 Students in DR Congo</h4><p>Infections spread across 99 schools in the east.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-la"></span>PERU &bull; ANDES</div><h4>Quake 6.7 Shakes Central Peru</h4><p>One dead, 16 injured, 850+ displaced.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-af"></span>NIGERIA &bull; BOAT</div><h4>Boat Capsizes En Route to Funeral; 24 Dead</h4><p>Vessel carrying mourners sinks, officials say.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-as"></span>KOREA &bull; EXAMS</div><h4>Suneung Cheating Scandal: 111 Caught</h4><p>111 caught despite tough anti-cheating checks.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-eu"></span>BELGIUM &bull; STRIKE</div><h4>All Flights Off Monday in Strike</h4><p>Controllers join nationwide protest over cuts.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-na"></span>SPORT &bull; FORMULA 1</div><h4>Verstappen Wins Las Vegas GP Thriller</h4><p>35 lead changes; Norris 2nd, Piastri 3rd.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-eu"></span>SPORT &bull; RUGBY</div><h4>Ireland Edge Springboks 20&ndash;17</h4><p>England rout All Blacks 37&ndash;12 at Twickenham.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-la"></span>SPORT &bull; FOOTBALL</div><h4>Chile Fight Back to Beat Algeria 4&ndash;2</h4><p>Comeback win at FIFA U-17 World Cup in Qatar.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-na"></span>US &bull; CYBER</div><h4>FBI Probes Hack of Crime Database</h4><p>Crime records breached; USDA systems also hit.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-oc"></span>AUSTRALIA &bull; ENERGY</div><h4>NSW Lets Coalmine Lift Output by a Third</h4><p>Mount Pleasant to reach 16.5m tonnes a year.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-eu"></span>OBITUARIES</div><h4>Paolo Bulgari Dies at 89</h4><p>Jeweller, 89, and ex-UN Women chief, 71, both die.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-oc"></span>SPORT &bull; CRICKET</div><h4>Australia Edge England in T20 Thriller</h4><p>Chase 191/7 in 19.5 overs to win by 3 wickets.</p></div>
+    <div class="item"><div class="gk"><span class="dot d-eu"></span>UK &bull; COURTS</div><h4>Activist Jailed for Puncturing Dinghy</h4><p>Danny Tommo gets 15 months over Channel sabotage.</p></div>
+  </div>
+
+  <div class="footer">Sources: Reuters &nbsp;•&nbsp; AP &nbsp;•&nbsp; AFP &nbsp;•&nbsp; ESA &nbsp;•&nbsp; ANTARA &nbsp;•&nbsp; Asahi &nbsp;•&nbsp; The Guardian &nbsp;•&nbsp; Financial Times &nbsp;•&nbsp; Formula 1 &nbsp;•&nbsp; Every story happened or was first reported on Saturday, 21 November 2026</div>
+</body>
+</html>
